@@ -1,7 +1,12 @@
 # toggl-reporter
-generate daily, weekly reports of a given user's [toggl](https://toggl.com/) entries.
+generate weekly reports of my [toggl](https://toggl.com/) entries.
 
 utilizes `toggl-api` which is a wrapper for the official HTTP Toggl API. [report docs](https://github.com/toggl/toggl_api_docs/blob/master/reports.md) are useful!
+
+i use this tool at the end of my work week to: 
+
+* review recorded time entries
+* calculate total time spent for a given `tag` and `untagged` entries
 
 ## setup
 duplicate `sample.env` and provide the requisite information
@@ -13,6 +18,4 @@ duplicate `sample.env` and provide the requisite information
 
 ## todo
 * test
-* convert millisecond duration to hours:minutes:seconds
-* better instructions
-* cli interface
+* add more reporting options

@@ -11,14 +11,19 @@ const { duration } = require('moment');
 const toggl = require('./lib/toggl');
 const logger = require('./lib/logger');
 
-const options = {
-  user_agent: process.env.TR_OPT_USER_AGENT,
-  workspace_id: process.env.TR_OPT_WORKSPACE_ID,
-  page: 1,
-  project_ids: process.env.TR_OPT_PROJECT_IDS,
+const readableDuration = (ms) => {
+  const hMDurOfTag = duration(ms);
+  return `${hMDurOfTag.hours()}:${hMDurOfTag.minutes()}`;
 };
 
-const getDurationForTags = (data) => {
+const printDataDescriptions = (data) => {
+  data.forEach(({ description, dur, tags }) => {
+    const tagStr = !tags ? 'general' : tags.join('/');
+    logger.info(`${description} -- [${tagStr}](${readableDuration(dur)})`);
+  });
+};
+
+const printDurationForTags = (data) => {
   const tags = ['']; // empty tag is categorized as 'general'
 
   // extract tag names from data and remove repeated tags
@@ -31,19 +36,28 @@ const getDurationForTags = (data) => {
 
     const tagName = !tag ? 'general' : tag;
     const msDurOfTag = reduce(dataWithTag, (memo, d) => memo + d.dur, 0);
-    const hMDurOfTag = duration(msDurOfTag);
-    const durationString = `${hMDurOfTag.hours()}:${hMDurOfTag.minutes()}`;
+    const durationString = readableDuration(msDurOfTag);
 
     logger.info(`${tagName}: ${durationString}`);
   });
 };
 
+/**
+ * @app
+ * fetch detailed report data, then log useful information back to the console
+ */
+const options = {
+  user_agent: process.env.TR_OPT_USER_AGENT,
+  workspace_id: process.env.TR_OPT_WORKSPACE_ID,
+  project_ids: process.env.TR_OPT_PROJECT_IDS,
+  page: 1,
+};
 toggl.detailedReport(options, (err, { data }) => {
   if (err) throw err;
   if (data) {
-    getDurationForTags(data);
+    printDurationForTags(data);
 
-    // print descriptive list of entries
+    printDataDescriptions(data);
   } else {
     logger.info('did not get any data :()');
   }
