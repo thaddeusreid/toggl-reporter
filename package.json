@@ -1,0 +1,26 @@
+{
+  "name": "toggl-reporter",
+  "version": "1.0.0",
+  "description": "generate daily, weekly reports of a given user's [toggl](https://toggl.com/) entries.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "thaddeus reid <trs@thaddeusreid.com> (http://thaddeusreid.com)",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "moment": "^2.19.1",
+    "toggl-api": "^1.0.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0"
+  }
+}
