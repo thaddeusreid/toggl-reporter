@@ -8,21 +8,42 @@ const {
   uniq,
 } = require('underscore');
 const { duration } = require('moment');
+
 const toggl = require('./lib/toggl');
 const logger = require('./lib/logger');
 
+const UNTAGGED_NAME = 'general';
+
+/**
+ * @method readableDuration
+ * @param ms an integer of milliseconds
+ *
+ * converts millisecond value to string of <hours:minutes>
+ */
 const readableDuration = (ms) => {
   const hMDurOfTag = duration(ms);
   return `${hMDurOfTag.hours()}:${hMDurOfTag.minutes()}`;
 };
 
+/**
+ * @method printDataDescriptions
+ * @param data an array of Toggl time entries
+ *
+ * print the descriptive title of each time entry, with corresponding tag names and duration
+ */
 const printDataDescriptions = (data) => {
   data.forEach(({ description, dur, tags }) => {
-    const tagStr = !tags ? 'general' : tags.join('/');
+    const tagStr = tags.length === 0 ? UNTAGGED_NAME : tags.join('/');
     logger.info(`${description} -- [${tagStr}](${readableDuration(dur)})`);
   });
 };
 
+/**
+ * @method printDurationForTags
+ * @param data an array of Toggl time entries
+ *
+ * calculate time for the entries organized by tag names.
+ */
 const printDurationForTags = (data) => {
   const tags = ['']; // empty tag is categorized as 'general'
 
@@ -34,7 +55,7 @@ const printDurationForTags = (data) => {
     const dataWithTag = tag ?
       filter(data, d => contains(d.tags, tag)) : filter(data, d => d.tags.length === 0);
 
-    const tagName = !tag ? 'general' : tag;
+    const tagName = !tag ? UNTAGGED_NAME : tag;
     const msDurOfTag = reduce(dataWithTag, (memo, d) => memo + d.dur, 0);
     const durationString = readableDuration(msDurOfTag);
 
