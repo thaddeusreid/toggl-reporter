@@ -11,16 +11,16 @@
   "author": "thaddeus reid <trs@thaddeusreid.com> (http://thaddeusreid.com)",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^4.0.0",
-    "moment": "^2.19.1",
-    "toggl-api": "^1.0.1",
-    "underscore": "^1.8.3"
+    "dotenv": "latest",
+    "moment": "latest",
+    "toggl-api": "latest",
+    "underscore": "latest"
   },
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint": "latest",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jsx-a11y": "latest",
+    "eslint-plugin-react": "latest"
   }
 }
