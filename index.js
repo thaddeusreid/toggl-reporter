@@ -22,7 +22,9 @@ const UNTAGGED_NAME = 'general';
  */
 const readableDuration = (ms) => {
   const hMDurOfTag = duration(ms);
-  return `${hMDurOfTag.hours()}:${hMDurOfTag.minutes()}`;
+  // return `${hMDurOfTag.hours()}:${hMDurOfTag.minutes()}`;
+  const asHours = hMDurOfTag.asHours();
+  return Math.round(asHours * 10) / 10;
 };
 
 /**
@@ -76,9 +78,9 @@ const options = {
 toggl.detailedReport(options, (err, { data }) => {
   if (err) throw err;
   if (data) {
-    printDurationForTags(data);
-
     printDataDescriptions(data);
+    logger.info('\n-----\n');
+    printDurationForTags(data);
   } else {
     logger.info('did not get any data :()');
   }
