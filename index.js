@@ -12,7 +12,7 @@ const { duration } = require('moment');
 const toggl = require('./lib/toggl');
 const logger = require('./lib/logger');
 
-const UNTAGGED_NAME = 'general';
+const UNTAGGED_NAME = 'r&d: general';
 
 /**
  * @method readableDuration
@@ -55,7 +55,7 @@ const printDurationForTags = (data) => {
   tags.push(...uniq(flatten(pluck(data, 'tags'))));
 
   // calculate total duration for each tag
-  tags.forEach((tag) => {
+  tags.sort().forEach((tag) => {
     const dataWithTag = tag
       ? filter(data, d => contains(d.tags, tag))
       : filter(data, d => d.tags.length === 0);
