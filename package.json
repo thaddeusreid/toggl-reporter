@@ -4,7 +4,7 @@
     "dotenv": "8.0.0",
     "moment": "2.24.0",
     "toggl-api": "1.0.1",
-    "underscore": "1.9.1"
+    "underscore": "1.12.1"
   },
   "description": "generate daily, weekly reports of a given user's [toggl](https://toggl.com/) entries.",
   "devDependencies": {
